@@ -10,19 +10,22 @@ type UnconrolledAccordionPropsType = {
 function UncontrolledAccordion(props: UnconrolledAccordionPropsType) {
     const [collapsed, SetCollapsed]=useState(false);
     return (<div>
-            <AccordionTitle title={props.title}/>
-            <button  onClick={()=>{SetCollapsed(!collapsed)}}>Toggle</button>
+            <AccordionTitle title={props.title} setCollapsed={SetCollapsed} collapsed={collapsed}/>
+            {/*<button  onClick={()=>{SetCollapsed(!collapsed)}}>Toggle</button>*/}
             {!collapsed && <AccordionBody/>}
         </div>
     )
 
 }
 
-
+type AccordionTtileType={
+    setCollapsed: (value: boolean)=> void;
+    collapsed: boolean;
+}
 
 function AccordionTitle(props: any) {
     return (
-        <h3>{props.title}</h3>
+        <h3 onClick={()=>{props.setCollapsed(!props.collapsed)}}>{props.title}</h3>
     )
 }
 
